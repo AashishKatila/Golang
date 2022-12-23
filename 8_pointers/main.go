@@ -2,16 +2,31 @@ package main
 
 import "fmt"
 
+func zeroval(ival int) {
+	ival = 0
+}
+
+func zeroptr(iptr *int) {
+	*iptr = 5
+}
+
 func main() {
 
-	a := 5
-	b := &a
+	var ptr *int
+	fmt.Println("Value of ptr = ", ptr)
 
-	fmt.Println(a)
-	fmt.Printf("%T\n", b)
-	fmt.Println(b)
-	fmt.Println(*b)
-	*b = 23
-	fmt.Println(*b)
-	fmt.Println(*&a)
+	a := 5
+	ptr = &a
+	fmt.Println("Value of ptr = ", ptr)
+	fmt.Println("Value of ptr = ", *ptr)
+
+	i := 3
+	fmt.Println("Value of i = ", i)
+
+	zeroval(i)
+	fmt.Println("Value of i = ", i)
+
+	zeroptr(&i)
+	fmt.Println("Value of i = ", i)
+
 }
