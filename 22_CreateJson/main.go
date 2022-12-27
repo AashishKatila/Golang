@@ -28,7 +28,8 @@ func main() {
 	// 	panic(err)
 	// }
 	// fmt.Println(b)
-	EncodeJson()
+	// EncodeJson()
+	DecodeJson()
 }
 
 func EncodeJson() {
@@ -43,4 +44,34 @@ func EncodeJson() {
 		panic(err)
 	}
 	fmt.Printf("%s \n", finalJson)
+}
+
+func DecodeJson() {
+	jsonDataFromWeb := []byte(`
+	{
+		"courseName": "React-js",   
+		"Price": 266,
+		"website": "hello.com",     
+		"tags": ["web-dev","js"]
+	}
+		`)
+	// fmt.Println(jsonDataFromWeb)
+	var goCourse course
+	checkValid := json.Valid(jsonDataFromWeb)
+	if checkValid {
+		fmt.Println("JSON valid")
+		json.Unmarshal(jsonDataFromWeb, &goCourse)
+		fmt.Printf("%#v \n", goCourse)
+	} else {
+		fmt.Println("JSON not valid")
+	}
+
+	var myOnlineData map[string]interface{}
+	json.Unmarshal(jsonDataFromWeb, &myOnlineData)
+	fmt.Printf("%#v \n", myOnlineData)
+
+	for k, v := range myOnlineData {
+		fmt.Printf("Key is %v adn value is %v and Type: %T \n", k, v, v)
+	}
+
 }
